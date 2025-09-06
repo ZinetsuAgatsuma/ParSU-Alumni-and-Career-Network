@@ -18,7 +18,7 @@ const openSans = Open_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "Parsu - Alumni & Student Career Network",
+  title: "AlumNet: Alumni - University Network Hub",
   description: "Connect with alumni, discover career paths, and find opportunities",
   generator: "v0.app",
 }

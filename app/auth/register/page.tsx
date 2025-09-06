@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Loader2 } from "lucide-react"
+import { Loader2, User, Mail, Lock, Building } from "lucide-react"
 import Link from "next/link"
 
 export default function RegisterPage() {
@@ -37,14 +37,12 @@ export default function RegisterPage() {
     setIsLoading(true)
     setError("")
 
-    // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match")
       setIsLoading(false)
       return
     }
 
-    // Validate all fields are filled
     if (
       !formData.firstName ||
       !formData.lastName ||
@@ -76,15 +74,15 @@ export default function RegisterPage() {
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center space-x-2">
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-serif font-black text-xl">P</span>
+              <span className="text-primary-foreground font-serif font-black text-xl">A</span>
             </div>
-            <span className="font-serif font-bold text-2xl text-foreground">Parsu</span>
+            <span className="font-serif font-bold text-2xl text-foreground">AlumNet</span>
           </Link>
         </div>
 
         <Card className="border-border">
           <CardHeader className="text-center">
-            <CardTitle className="font-serif font-bold text-2xl">Join Parsu</CardTitle>
+            <CardTitle className="font-serif font-bold text-2xl">Join AlumNet</CardTitle>
             <CardDescription>Create your account and start building your professional network</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -94,96 +92,119 @@ export default function RegisterPage() {
               </Alert>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name</Label>
+            <form onSubmit={handleSubmit} className="space-y-6 bg-card/50 p-6 rounded-lg">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex flex-col">
+                  <Label htmlFor="firstName" className="text-sm">First Name</Label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"><User size={16} /></span>
+                    <Input
+                      id="firstName"
+                      placeholder="John"
+                      className="rounded-lg py-3 pl-10 pr-4 border border-border bg-background/50 placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+                      value={formData.firstName}
+                      onChange={(e) => handleInputChange("firstName", e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <Label htmlFor="lastName" className="text-sm">Last Name</Label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"><User size={16} /></span>
+                    <Input
+                      id="lastName"
+                      placeholder="Doe"
+                      className="rounded-lg py-3 pl-10 pr-4 border border-border bg-background/50 placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+                      value={formData.lastName}
+                      onChange={(e) => handleInputChange("lastName", e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col">
+                <Label htmlFor="email" className="text-sm">Email</Label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"><Mail size={16} /></span>
                   <Input
-                    id="firstName"
-                    placeholder="John"
-                    className="bg-input border-border"
-                    value={formData.firstName}
-                    onChange={(e) => handleInputChange("firstName", e.target.value)}
+                    id="email"
+                    type="email"
+                    placeholder="your.email@university.edu"
+                    className="rounded-lg py-3 pl-10 pr-4 border border-border bg-background/50 placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
                     required
                   />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name</Label>
+                <span className="text-xs text-muted-foreground mt-1">Use your university email for faster verification.</span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+                <div className="flex flex-col">
+                  <Label htmlFor="userType" className="text-sm">I am a</Label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"><Building size={16} /></span>
+                    <Select onValueChange={(value) => handleInputChange("userType", value)}>
+                      <SelectTrigger className="rounded-lg py-3 pl-10 pr-3 border border-border bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/30">
+                        <SelectValue placeholder="Select your status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="alumni">Alumni</SelectItem>
+                        <SelectItem value="employer">Employer</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="flex flex-col">
+                  <Label htmlFor="university" className="text-sm">University</Label>
                   <Input
-                    id="lastName"
-                    placeholder="Doe"
-                    className="bg-input border-border"
-                    value={formData.lastName}
-                    onChange={(e) => handleInputChange("lastName", e.target.value)}
+                    id="university"
+                    placeholder="Your University Name"
+                    className="rounded-lg py-3 px-4 border border-border bg-background/50 placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+                    value={formData.university}
+                    onChange={(e) => handleInputChange("university", e.target.value)}
                     required
                   />
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="your.email@university.edu"
-                  className="bg-input border-border"
-                  value={formData.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
-                  required
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex flex-col">
+                  <Label htmlFor="password" className="text-sm">Password</Label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"><Lock size={16} /></span>
+                    <Input
+                      id="password"
+                      type="password"
+                      className="rounded-lg py-3 pl-10 pr-4 border border-border bg-background/50 placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+                      value={formData.password}
+                      onChange={(e) => handleInputChange("password", e.target.value)}
+                      required
+                    />
+                  </div>
+                  <span className="text-xs text-muted-foreground mt-1">Use at least 8 characters, include numbers & uppercase letters.</span>
+                </div>
+
+                <div className="flex flex-col">
+                  <Label htmlFor="confirmPassword" className="text-sm">Confirm Password</Label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"><Lock size={16} /></span>
+                    <Input
+                      id="confirmPassword"
+                      type="password"
+                      className="rounded-lg py-3 pl-10 pr-4 border border-border bg-background/50 placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+                      value={formData.confirmPassword}
+                      onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="userType">I am a</Label>
-                <Select onValueChange={(value) => handleInputChange("userType", value)}>
-                  <SelectTrigger className="bg-input border-border">
-                    <SelectValue placeholder="Select your status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="student">Current Student</SelectItem>
-                    <SelectItem value="alumni">Alumni</SelectItem>
-                    <SelectItem value="employer">Employer</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="university">University</Label>
-                <Input
-                  id="university"
-                  placeholder="Your University Name"
-                  className="bg-input border-border"
-                  value={formData.university}
-                  onChange={(e) => handleInputChange("university", e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  className="bg-input border-border"
-                  value={formData.password}
-                  onChange={(e) => handleInputChange("password", e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="confirmPassword">Confirm Password</Label>
-                <Input
-                  id="confirmPassword"
-                  type="password"
-                  className="bg-input border-border"
-                  value={formData.confirmPassword}
-                  onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
-                  required
-                />
-              </div>
-
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button type="submit" className="w-full rounded-lg py-3" disabled={isLoading}>
                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Create Account
               </Button>

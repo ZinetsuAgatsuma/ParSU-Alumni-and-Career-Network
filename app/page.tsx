@@ -13,9 +13,9 @@ export default function HomePage() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-serif font-black text-lg">P</span>
+                <span className="text-primary-foreground font-serif font-black text-lg">A</span>
               </div>
-              <span className="font-serif font-bold text-xl text-foreground">Parsu</span>
+              <span className="font-serif font-bold text-xl text-foreground">AlumNet</span>
             </div>
             <div className="flex items-center space-x-4">
               <Link href="/auth/login">
@@ -178,9 +178,9 @@ export default function HomePage() {
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-primary-foreground font-serif font-black text-lg">P</span>
               </div>
-              <span className="font-serif font-bold text-xl text-foreground">Parsu</span>
+              <span className="font-serif font-bold text-xl text-foreground">AlumNet</span>
             </div>
-            <div className="text-sm text-muted-foreground">© 2024 Parsu. Connecting careers, building futures.</div>
+            <div className="text-sm text-muted-foreground">© 2025 AlumNet: Alumni - University Network Hub</div>
           </div>
         </div>
       </footer>
