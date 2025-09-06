@@ -34,7 +34,7 @@ export function DashboardNav({ user }: DashboardNavProps) {
   const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: Home },
     { name: "My Profile", href: "/profile", icon: User },
-    { name: "Network", href: "/network", icon: Users },
+
     { name: "Jobs", href: "/jobs", icon: Briefcase },
     { name: "Mentorship", href: "/mentorship", icon: GraduationCap },
     { name: "Messages", href: "/messages", icon: MessageCircle },
@@ -70,9 +70,9 @@ export function DashboardNav({ user }: DashboardNavProps) {
           {/* Logo */}
           <Link href="/dashboard" className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-serif font-black text-lg">P</span>
+              <span className="text-primary-foreground font-serif font-black text-lg">A</span>
             </div>
-            <span className="font-serif font-bold text-xl text-foreground">Parsu</span>
+            <span className="font-serif font-bold text-xl text-foreground">AlumNet</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -116,9 +116,7 @@ export function DashboardNav({ user }: DashboardNavProps) {
                     <p className="text-sm font-medium leading-none">{user.name}</p>
                     <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
                     <div className="flex items-center space-x-2">
-                      <Badge className={`text-xs ${getUserTypeColor(user.userType)}`}>
-                        {user.userType?.charAt(0).toUpperCase() + user.userType?.slice(1)}
-                      </Badge>
+                    
                       {user.university && <span className="text-xs text-muted-foreground">{user.university}</span>}
                     </div>
                   </div>
